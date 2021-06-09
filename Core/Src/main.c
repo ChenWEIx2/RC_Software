@@ -90,7 +90,7 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   //LED_GPIO_Init();     //MX_GPIO_Init() has finish this step
-  KEY_GPIO_Init();       //MX_GPIO_Init() has finish this step
+  //KEY_GPIO_Init();       //MX_GPIO_Init() has finish this step
   LED_Green_ON;          //after power-on,the power indicator light(Green LED) is on 
 
   uint16_t Key_Pin[] = {Front_Fine_Tune_Key_Pin, 
