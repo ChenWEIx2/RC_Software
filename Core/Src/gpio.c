@@ -58,6 +58,14 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PBPin PBPin PBPin PBPin
+                           PBPin PBPin */
+  GPIO_InitStruct.Pin = Front_Fine_Tune_Key_Pin|Left_Fine_Tune_Key_Pin|Back_Fine_Tune_Key_Pin|Right_Fine_Tune_Key_Pin
+                          |Right_Key_Pin|Left_Key_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 2 */

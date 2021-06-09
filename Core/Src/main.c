@@ -24,6 +24,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bsp_led.h"
+#include "bsp_key.h"
+
+#include "key_function.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -86,19 +89,16 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  LED_GPIO_Init();
+  //LED_GPIO_Init();     //MX_GPIO_Init() has finish this step
+  KEY_GPIO_Init();       //
   LED_Green_ON;          //after power-on,the power indicator light(Green LED) is on 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-
-    /* USER CODE END WHILE */
-    /* USER CODE BEGIN 3 */
+  while (1){
+    
   }
-  /* USER CODE END 3 */
 }
 
 /**

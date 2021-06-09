@@ -60,6 +60,18 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED2_Pin GPIO_PIN_10
 #define LED2_GPIO_Port GPIOB
+#define Front_Fine_Tune_Key_Pin GPIO_PIN_3
+#define Front_Fine_Tune_Key_GPIO_Port GPIOB
+#define Left_Fine_Tune_Key_Pin GPIO_PIN_4
+#define Left_Fine_Tune_Key_GPIO_Port GPIOB
+#define Back_Fine_Tune_Key_Pin GPIO_PIN_5
+#define Back_Fine_Tune_Key_GPIO_Port GPIOB
+#define Right_Fine_Tune_Key_Pin GPIO_PIN_6
+#define Right_Fine_Tune_Key_GPIO_Port GPIOB
+#define Right_Key_Pin GPIO_PIN_7
+#define Right_Key_GPIO_Port GPIOB
+#define Left_Key_Pin GPIO_PIN_8
+#define Left_Key_GPIO_Port GPIOB
 #define LED1_Pin GPIO_PIN_9
 #define LED1_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
