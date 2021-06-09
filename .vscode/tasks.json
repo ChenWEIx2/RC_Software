@@ -8,8 +8,6 @@
             "label": "Build",
             "command": "mingw32-make",
             "args": [
-                "-I",
-                "C:/Users/Kiana/Desktop/RC_Software/BSP/LED"
             ],
             "problemMatcher": [
                 "$gcc"

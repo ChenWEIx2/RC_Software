@@ -10,17 +10,34 @@
 
 typedef struct 
 {
+    uint8_t key_0;
+    uint8_t key_1;
+    uint8_t key_2;
+    uint8_t key_3;
+    uint8_t key_4;
+    uint8_t key_5;
+    
+}__key_data;
+
+typedef struct 
+{
     double ch1_x;
     double ch1_y;
     double ch2_x;
     double ch2_y;
+}__channel_data;
 
-    bool key_0;
-    bool key_1;
-    bool key_2;
-    bool key_3;
-    
-}__rc_struct;
+typedef struct
+{
+  double pithc;
+  double roll;
+  double yaw;
+
+  double horizontal_speed;
+  double vertical_speed;
+}__kinetic_data;
+
+
 
 
 #endif

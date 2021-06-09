@@ -90,14 +90,21 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   //LED_GPIO_Init();     //MX_GPIO_Init() has finish this step
-  KEY_GPIO_Init();       //
+  KEY_GPIO_Init();       //MX_GPIO_Init() has finish this step
   LED_Green_ON;          //after power-on,the power indicator light(Green LED) is on 
+
+  uint16_t Key_Pin[] = {Front_Fine_Tune_Key_Pin, 
+                        Back_Fine_Tune_Key_Pin, 
+                        Left_Fine_Tune_Key_Pin, 
+                        Right_Fine_Tune_Key_Pin, 
+                        Left_Key_Pin, 
+                        Right_Key_Pin};  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
-    
+    Key_FSM(GPIOB,Key_Pin,KEY_DATA);
   }
 }
 

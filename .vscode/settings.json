@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "bsp_led.h": "c"
+        "bsp_led.h": "c",
+        "key_function.h": "c"
     }
 }

@@ -38,6 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/gpio.c \
+Core/Src/key_function.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
@@ -57,8 +58,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c \
 BSP/LED/Src/bsp_led.c \
-BSP/KEY/Src/bsp_key.c
-
+BSP/KEY/Src/bsp_key.c 
 
 # ASM sources
 ASM_SOURCES =  \
