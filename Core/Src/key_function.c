@@ -13,20 +13,13 @@
  #include "key_function.h"
 
 
- void Key_FSM(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__key_data data){
+ void Key_Data_Write(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__key_data* data){
      
-     data.key_0 &= 0;
-     data.key_1 &= 0;
-     data.key_2 &= 0;
-     data.key_3 &= 0; 
-     data.key_4 &= 0;
-     data.key_5 &= 0;  
- 
-     if(Key_Scan(GPIOx, *GPIO_Pin))  data.key_0 = 1;
-     if(Key_Scan(GPIOx, *(GPIO_Pin + 1))) data.key_1 = 1;
-     if(Key_Scan(GPIOx, *(GPIO_Pin + 2))) data.key_2 = 1;
-     if(Key_Scan(GPIOx, *(GPIO_Pin + 3))) data.key_3 = 1;
-     if(Key_Scan(GPIOx, *(GPIO_Pin + 4))) data.key_4 = 1;
-     if(Key_Scan(GPIOx, *(GPIO_Pin + 5))) data.key_5 = 5;
+    data->key_0 = (Key_Scan(GPIOx, *GPIO_Pin))? 1:0;
+    data->key_1 = (Key_Scan(GPIOx, *(GPIO_Pin + 1)))? 1:0;
+    data->key_2 = (Key_Scan(GPIOx, *(GPIO_Pin + 2)))? 1:0;
+    data->key_3 = (Key_Scan(GPIOx, *(GPIO_Pin + 3)))? 1:0; 
+    data->key_4 = (Key_Scan(GPIOx, *(GPIO_Pin + 4)))? 1:0;
+    data->key_5 = (Key_Scan(GPIOx, *(GPIO_Pin + 5)))? 1:0;  
  
  }

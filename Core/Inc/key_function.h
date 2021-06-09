@@ -18,7 +18,7 @@
  #include "bsp_key.h"
  #include "rc_struct.h"
 
- void Key_FSM(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__key_data data);
+ void Key_Data_Write(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__key_data* data);
 
 
  #endif

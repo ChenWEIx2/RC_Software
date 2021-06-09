@@ -104,7 +104,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1){
-    Key_FSM(GPIOB,Key_Pin,KEY_DATA);
+    Key_Data_Write(GPIOB,Key_Pin,&KEY_DATA);
   }
 }
 
