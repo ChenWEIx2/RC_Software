@@ -31,9 +31,9 @@
   uint8_t Key_Scan(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin){
     
     /*judege the key was entered or not*/
-    if(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_RESET){
+    if(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_SET){
         /* Entered */
-        while(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_SET);
+        while(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_RESET);
         return 1;
     }
     else{
