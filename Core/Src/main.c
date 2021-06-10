@@ -51,6 +51,11 @@
 
 /* USER CODE BEGIN PV */
 volatile uint16_t adc_result[4];
+
+__Key_Data key_data;
+uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
+                       Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
+                       Left_Key_Pin,Right_Key_Pin};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -109,6 +114,8 @@ int main(void)
     char str[64];
     sprintf(str,"%f,%f,%f,%f\r\n",(adc_result[0]*3.3/4095),(adc_result[1]*3.3/4095),(adc_result[2]*3.3/4095),(adc_result[3]*3.3/4095));
     HAL_UART_Transmit(&huart1,(uint8_t *)str,strlen(str),HAL_MAX_DELAY);
+
+    Key_Data_Write(GPIOB,Key_Pin,&key_data);
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
 

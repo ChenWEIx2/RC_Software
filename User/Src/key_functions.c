@@ -42,7 +42,7 @@
     }
  }
 
- void Key_Data_Write(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__key_data* data){
+ void Key_Data_Write(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__Key_Data* data){
      
     data->key_0 = (Key_Scan(GPIOx, *GPIO_Pin))? 1:0;
     data->key_1 = (Key_Scan(GPIOx, *(GPIO_Pin + 1)))? 1:0;

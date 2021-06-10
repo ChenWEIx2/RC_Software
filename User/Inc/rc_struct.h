@@ -17,7 +17,7 @@ typedef struct
     uint8_t key_4;
     uint8_t key_5;
     
-}__key_data;
+}__Key_Data;
 
 typedef struct 
 {
@@ -25,7 +25,7 @@ typedef struct
     double ch1_y;
     double ch2_x;
     double ch2_y;
-}__channel_data;
+}__Channel_Data;
 
 typedef struct
 {
@@ -35,7 +35,7 @@ typedef struct
 
   double horizontal_speed;
   double vertical_speed;
-}__kinetic_data;
+}__Kinetic_Data;
 
 
 
