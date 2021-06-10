@@ -4,9 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
-                "${workspaceFolder}/BSP",
-                "${workspaceFolder}/BSP/LED/Inc"
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
             ],
             "defines": [
                 "_DEBUG",
