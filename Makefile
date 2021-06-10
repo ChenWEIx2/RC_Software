@@ -64,7 +64,8 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
 User/Src/key_functions.c \
-User/Src/led_functions.c
+User/Src/led_functions.c \
+User/Src/rocker_functions.c
 
 
 # ASM sources

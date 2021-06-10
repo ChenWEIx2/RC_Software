@@ -8,6 +8,8 @@
 #ifndef __RC_STRUCT_H
 #define __RC_STRUCT_H
 
+#include <stdint.h>
+
 typedef struct 
 {
     uint8_t key_0;
@@ -25,7 +27,7 @@ typedef struct
     double ch1_y;
     double ch2_x;
     double ch2_y;
-}__Channel_Data;
+}__Rocker_Data;
 
 typedef struct
 {

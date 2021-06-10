@@ -31,6 +31,8 @@
 
 #include "led_functions.h"
 #include "key_functions.h"
+#include "rocker_functions.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,12 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile uint16_t adc_result[4];
 
-__Key_Data key_data;
-uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
-                       Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
-                       Left_Key_Pin,Right_Key_Pin};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -76,6 +73,16 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+  char str[64];
+
+  volatile uint16_t adc_result[4];
+
+__Key_Data key_data;
+uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
+                       Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
+                       Left_Key_Pin,Right_Key_Pin};
+
+__Rocker_Data rocker_data;
 
   /* USER CODE END 1 */
 
@@ -111,11 +118,12 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
   while (1)
   {
-    char str[64];
     sprintf(str,"%f,%f,%f,%f\r\n",(adc_result[0]*3.3/4095),(adc_result[1]*3.3/4095),(adc_result[2]*3.3/4095),(adc_result[3]*3.3/4095));
     HAL_UART_Transmit(&huart1,(uint8_t *)str,strlen(str),HAL_MAX_DELAY);
 
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
+    Rocker_Data_Mapping(&rocker_data,adc_result);
+
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
 
