@@ -5,8 +5,8 @@
   ******************************************************************************
 */
 
-#ifndef __RC_STRUCT_H__
-#define __RC_STRUCT_H__
+#ifndef __RC_STRUCT_H
+#define __RC_STRUCT_H
 
 typedef struct 
 {
