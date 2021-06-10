@@ -19,12 +19,17 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bsp_led.h"
 #include "bsp_key.h"
+#include "stdio.h"
+#include "string.h"
 
 #include "key_function.h"
 /* USER CODE END Includes */
@@ -46,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+volatile uint16_t adc_result[4];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -88,24 +93,28 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  //LED_GPIO_Init();     //MX_GPIO_Init() has finish this step
-  //KEY_GPIO_Init();       //MX_GPIO_Init() has finish this step
+
   LED_Green_ON;          //after power-on,the power indicator light(Green LED) is on 
 
-  uint16_t Key_Pin[] = {Front_Fine_Tune_Key_Pin, 
-                        Back_Fine_Tune_Key_Pin, 
-                        Left_Fine_Tune_Key_Pin, 
-                        Right_Fine_Tune_Key_Pin, 
-                        Left_Key_Pin, 
-                        Right_Key_Pin};  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1){
-    Key_Data_Write(GPIOB,Key_Pin,&KEY_DATA);
+  HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
+  while (1)
+  {
+    char str[64];
+    sprintf(str,"%f,%f,%f,%f\r\n",(adc_result[0]*3.3/4095),(adc_result[1]*3.3/4095),(adc_result[2]*3.3/4095),(adc_result[3]*3.3/4095));
+    HAL_UART_Transmit(&huart1,(uint8_t *)str,strlen(str),HAL_MAX_DELAY);
+    /* USER CODE END WHILE */
+    /* USER CODE BEGIN 3 */
+
   }
+  /* USER CODE END 3 */
 }
 
 /**

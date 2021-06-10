@@ -29,7 +29,6 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "rc_struct.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -75,9 +74,8 @@ void Error_Handler(void);
 #define Left_Key_GPIO_Port GPIOB
 #define LED1_Pin GPIO_PIN_9
 #define LED1_GPIO_Port GPIOB
-
 /* USER CODE BEGIN Private defines */
-__key_data KEY_DATA;
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
