@@ -9,8 +9,8 @@
   */
 
 
- #ifndef __BSP_LED_H
- #define __BSP_LED_H
+ #ifndef __LED_FUNCTIONS_H
+ #define __LED_FUNCTIONS_H
 
  #include "stm32f4xx.h"
 
