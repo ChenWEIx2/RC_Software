@@ -117,13 +117,10 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
   while (1)
   {
-    //sprintf(str,"%f,%f,%f,%f\r\n",(adc_result[0]*3.3/4095),(adc_result[1]*3.3/4095),(adc_result[2]*3.3/4095),(adc_result[3]*3.3/4095));
-    //HAL_UART_Transmit(&huart1,(uint8_t *)str,strlen(str),HAL_MAX_DELAY);
-
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
     Rocker_Data_Mapping(&rocker_data,adc_result);
 
-    LOGI("%d",1);
+    Rocker_Data_Printf(&rocker_data,6);
 
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
