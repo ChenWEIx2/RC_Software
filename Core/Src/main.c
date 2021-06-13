@@ -21,6 +21,7 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -106,10 +107,10 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_USART1_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-  LED_Green_ON;          //after power-on,the power indicator light(Green LED) is on 
-
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,9 +121,9 @@ int main(void)
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
     Rocker_Data_Mapping(&rocker_data,adc_result);
 
-    Rocker_Data_Printf(&rocker_data,6);
 
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
 
   }
@@ -173,7 +174,10 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
+{
+  Rocker_Data_Printf(&rocker_data,6);
+}
 /* USER CODE END 4 */
 
 /**
