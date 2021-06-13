@@ -65,7 +65,9 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
 User/Src/key_functions.c \
 User/Src/led_functions.c \
-User/Src/rocker_functions.c
+User/Src/rocker_functions.c \
+RTT/SEGGER_RTT_printf.c \
+RTT/SEGGER_RTT.c
 
 
 # ASM sources
@@ -128,7 +130,8 @@ C_INCLUDES =  \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include \
+-IRTT
 
 
 # compile gcc flags

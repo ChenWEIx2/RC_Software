@@ -32,6 +32,7 @@
 #include "led_functions.h"
 #include "key_functions.h"
 #include "rocker_functions.h"
+#include "log.h"
 
 /* USER CODE END Includes */
 
@@ -121,6 +122,8 @@ int main(void)
 
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
     Rocker_Data_Mapping(&rocker_data,adc_result);
+
+    LOGI("%d",1);
 
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
