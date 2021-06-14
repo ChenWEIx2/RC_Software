@@ -144,8 +144,8 @@ int main(void)
     }
     else
     {
-      LOGI("TX error");
-      LED_Red_OFF;
+      LOGE("TX error");
+      LED_Green_OFF;
     } 
 
   }
@@ -198,7 +198,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  Rocker_Data_Printf(&rocker_data,6);
+  //Rocker_Data_Printf(&rocker_data,6);
 }
 /* USER CODE END 4 */
 
