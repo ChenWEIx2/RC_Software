@@ -60,6 +60,18 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED1_Pin GPIO_PIN_13
 #define LED1_GPIO_Port GPIOC
+#define NRF24L01_CE_Pin GPIO_PIN_10
+#define NRF24L01_CE_GPIO_Port GPIOB
+#define NRF24L01_CS_Pin GPIO_PIN_12
+#define NRF24L01_CS_GPIO_Port GPIOB
+#define NRF24L01_SPI_SCK_Pin GPIO_PIN_13
+#define NRF24L01_SPI_SCK_GPIO_Port GPIOB
+#define NRF24L01_SPI_MISO_Pin GPIO_PIN_14
+#define NRF24L01_SPI_MISO_GPIO_Port GPIOB
+#define NRF24L01_SPI_MOSI_Pin GPIO_PIN_15
+#define NRF24L01_SPI_MOSI_GPIO_Port GPIOB
+#define NRF24L01_IRQ_Pin GPIO_PIN_8
+#define NRF24L01_IRQ_GPIO_Port GPIOA
 #define LED2_Pin GPIO_PIN_15
 #define LED2_GPIO_Port GPIOA
 #define Front_Fine_Tune_Key_Pin GPIO_PIN_3
