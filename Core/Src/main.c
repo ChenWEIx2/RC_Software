@@ -159,6 +159,8 @@ int main(void)
       LED_Green_OFF;
     } 
 
+    HAL_Delay(1000);
+
   }
   /* USER CODE END 3 */
 }
