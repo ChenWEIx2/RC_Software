@@ -57,7 +57,7 @@
 
 /* USER CODE BEGIN PV */
 volatile uint16_t adc_result[4];
-uint8_t nrf24l01_tx_buff[33] = "test";
+uint8_t nrf24l01_tx_buff[33];
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
@@ -132,6 +132,17 @@ int main(void)
   {
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
     Rocker_Data_Mapping(&rocker_data,adc_result);
+
+    nrf24l01_tx_buff[0] = key_data.key_0;
+    nrf24l01_tx_buff[1] = key_data.key_1;
+    nrf24l01_tx_buff[2] = key_data.key_2;
+    nrf24l01_tx_buff[3] = key_data.key_3;
+    nrf24l01_tx_buff[4] = key_data.key_4;
+    nrf24l01_tx_buff[5] = key_data.key_5;
+    nrf24l01_tx_buff[6] = rocker_data.ch1_x * 100;
+    nrf24l01_tx_buff[7] = rocker_data.ch1_y * 100;
+    nrf24l01_tx_buff[8] = rocker_data.ch2_x * 100;
+    nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
 
 
     /* USER CODE END WHILE */
