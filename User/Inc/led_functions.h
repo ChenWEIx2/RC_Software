@@ -13,16 +13,17 @@
  #define __LED_FUNCTIONS_H
 
  #include "stm32f4xx.h"
+ #include "main.h"
 
  // #define LED_Green_ON      do{HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_SET);}while(0)
 
- #define LED_Green_ON      HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_SET);
- #define LED_Green_OFF     HAL_GPIO_WritePin(GPIOB,GPIO_PIN_9,GPIO_PIN_RSET);
- #define LED_Green_Toggle  HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_9);
+ #define LED_Green_ON      HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
+ #define LED_Green_OFF     HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
+ #define LED_Green_Toggle  HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
 
- #define LED_Red_ON        HAL_GPIO_WritePin(GPIOB,GPIO_PIN_10,GPIO_PIN_SET);
- #define LED_Red_OFF       HAL_GPIO_WritePin(GPIOB,GPIO_PIN_10,GPIO_PIN_RSET);
- #define LED_Red_Toggle    HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_10);
+ #define LED_Red_ON        HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_SET);
+ #define LED_Red_OFF       HAL_GPIO_WritePin(LED2_GPIO_Port,LED2_Pin,GPIO_PIN_RESET);
+ #define LED_Red_Toggle    HAL_GPIO_TogglePin(LED2_GPIO_Port,LED2_Pin);
 
 
 
