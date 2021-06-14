@@ -70,7 +70,8 @@ RTT/SEGGER_RTT_printf.c \
 RTT/SEGGER_RTT.c \
 Core/Src/tim.c \
 Core/Src/spi.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c \
+User/Src/NRF24L01.c
 
 
 # ASM sources

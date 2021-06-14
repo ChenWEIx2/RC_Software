@@ -35,6 +35,7 @@
 #include "key_functions.h"
 #include "rocker_functions.h"
 #include "log.h"
+#include "NRF24L01.h"
 
 /* USER CODE END Includes */
 
@@ -55,16 +56,16 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-  char str[64];
-
-  volatile uint16_t adc_result[4];
+volatile uint16_t adc_result[4];
+uint8_t nrf24l01_tx_buff[33] = "test";
 
 __Key_Data key_data;
+__Rocker_Data rocker_data;
+
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
 
-__Rocker_Data rocker_data;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -113,6 +114,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start_IT(&htim2);
+
+  while(NRF24L01_Check())
+	{
+    LOGW("Can not find nrf24l01");
+		HAL_Delay(1000);
+	}
+  LOGI("NRF24L01 enter TX mode");
+  NRF24L01_TX_Mode();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -127,6 +137,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
+    {
+      LOGI("Tx success");
+      LED_Green_ON;
+    }
+    else
+    {
+      LOGI("TX error");
+      LED_Red_OFF;
+    } 
 
   }
   /* USER CODE END 3 */
