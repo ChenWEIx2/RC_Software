@@ -1,4 +1,4 @@
-/*
+
 {
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
@@ -8,7 +8,7 @@
         {
             "cwd": "${workspaceRoot}",
             "executable": "build/RC_Software.elf",
-            "name": "Debug Microcontroller",
+            "name": "STlink Debug",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
@@ -16,11 +16,24 @@
                 "D:/VS_Code_STM32/openocd-0.10.0/openocd-0.10.0/scripts/interface/stlink-v2.cfg",
                 "D:/VS_Code_STM32/openocd-0.10.0/openocd-0.10.0/scripts/target/stm32f4x.cfg"
             ]
+        },
+        {
+            "name": "JLink Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "build/RC_Software.elf",
+            "request":"launch",
+            "type":"cortex-debug",
+            "device":"STM32F401CC",        
+            "svdFile": "STM32F401.svd",  
+            "servertype": "jlink",         //使用的GDB Server
+            "configFiles": [                  
+            ],
+            "preLaunchTask": "Build"
         }
     ]
 }
-*/
 
+/*
 {
     // 使用 IntelliSense 了解相关属性。 
     // 悬停以查看现有属性的描述。
@@ -43,3 +56,4 @@
         }
     ]
 }
+*/
