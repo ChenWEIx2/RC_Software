@@ -113,7 +113,8 @@ int main(void)
   MX_TIM2_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
-
+  POWER_ON_BEEP;
+  
   HAL_TIM_Base_Start_IT(&htim2);
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
