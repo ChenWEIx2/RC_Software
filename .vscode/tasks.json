@@ -16,7 +16,7 @@
         },
         {
 			"type": "shell",
-			"label": "Build & Download",
+			"label": "Download",
 			"command": "openocd",
 			"args": [
 				"-f",
@@ -30,7 +30,7 @@
 				"$gcc"
 			],
 			"group": "build",
-			"dependsOn": "Build"
+			//"dependsOn": "Build"
         },
         {
             "label": "RTT",
