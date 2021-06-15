@@ -23,10 +23,10 @@ typedef struct
 
 typedef struct 
 {
-    double ch1_x;
-    double ch1_y;
-    double ch2_x;
-    double ch2_y;
+    float ch1_x;
+    float ch1_y;
+    float ch2_x;
+    float ch2_y;
 }__Rocker_Data;
 
 typedef struct
