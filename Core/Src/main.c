@@ -36,6 +36,7 @@
 #include "rocker_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
+#include "unlock.h"
 
 /* USER CODE END Includes */
 
@@ -58,10 +59,10 @@
 /* USER CODE BEGIN PV */
 volatile uint16_t adc_result[4];
 uint8_t nrf24l01_tx_buff[33];
+uint8_t unlock_flag = 0;
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
-
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
@@ -115,6 +116,13 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(&htim2);
 
+  HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
+  while(!unlock_flag)
+  {
+    LOGW("Lock!");
+    unlock_flag = Unlock(adc_result);
+    HAL_Delay(1000);
+  }
   
   while(NRF24L01_Check())
 	{
@@ -128,7 +136,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
   while (1)
   {
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
