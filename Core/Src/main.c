@@ -115,6 +115,7 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(&htim2);
 
+  
   while(NRF24L01_Check())
 	{
     LOGW("Can not find nrf24l01");
@@ -144,10 +145,10 @@ int main(void)
     nrf24l01_tx_buff[8] = rocker_data.ch2_x * 100;
     nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
 
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    
     if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
     {
       LOGI("Tx success");
@@ -160,6 +161,7 @@ int main(void)
     } 
 
     HAL_Delay(1000);
+    
 
   }
   /* USER CODE END 3 */

@@ -23,6 +23,8 @@ typedef struct
 
 typedef struct 
 {
+    float meanless1;
+    float meanless2;
     float ch1_x;
     float ch1_y;
     float ch2_x;
