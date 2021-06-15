@@ -72,6 +72,8 @@ void Error_Handler(void);
 #define NRF24L01_SPI_MOSI_GPIO_Port GPIOB
 #define NRF24L01_IRQ_Pin GPIO_PIN_8
 #define NRF24L01_IRQ_GPIO_Port GPIOA
+#define Beep_Pin GPIO_PIN_12
+#define Beep_GPIO_Port GPIOA
 #define LED2_Pin GPIO_PIN_15
 #define LED2_GPIO_Port GPIOA
 #define Front_Fine_Tune_Key_Pin GPIO_PIN_3
