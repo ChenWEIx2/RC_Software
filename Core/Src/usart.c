@@ -110,7 +110,22 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+int __io_putchar(int ch)
+{
+    while ((USART1->SR & 0X40) == 0);
+    USART1->DR = (uint8_t) ch;
+    return ch;
+}
 
+__attribute__((weak)) int _write(int file, char *ptr, int len)
+{
+	int DataIdx;
+	for (DataIdx = 0; DataIdx < len; DataIdx++)
+	{
+		__io_putchar(*ptr++);
+	}
+	return len;
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
