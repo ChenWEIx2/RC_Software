@@ -60,6 +60,7 @@
 volatile uint16_t adc_result[4];
 uint8_t nrf24l01_tx_buff[33];
 uint8_t unlock_flag = 0;
+uint8_t nrf24l01_tx_flag = 0;
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
@@ -152,7 +153,8 @@ int main(void)
     nrf24l01_tx_buff[7] = rocker_data.ch1_y * 100;
     nrf24l01_tx_buff[8] = rocker_data.ch2_x * 100;
     nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
-
+    
+    nrf24l01_tx_flag = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -160,11 +162,13 @@ int main(void)
     if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
     {
       printf("Tx success.\r\n");
+      nrf24l01_tx_flag = 1;
       LED_Green_ON;
     }
     else
     {
       printf("TX error!!!\r\n");
+      nrf24l01_tx_flag = 0;
       LED_Green_OFF;
     } 
 
@@ -221,7 +225,10 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  NRF24L01_TX_Buff_Printf(nrf24l01_tx_buff);
+  if(nrf24l01_tx_flag)
+  {
+    NRF24L01_TX_Buff_Printf(nrf24l01_tx_buff);
+  }
 }
 /* USER CODE END 4 */
 
