@@ -134,26 +134,27 @@ uint8_t NRF24L01_TxPacket(uint8_t *txbuf)
 	uint8_t sta;
 	NRF24L01_CE_LOW();
   NRF24L01_Write_Buf(WR_TX_PLOAD,txbuf,TX_PLOAD_WIDTH);//写数据到TX BUF  32个字节
- 	NRF24L01_CE_HIGH();//启动发送	 
+ 	NRF24L01_CE_HIGH();                                  //启动发送	 
   
-	while(NRF24L01_IRQ_PIN_READ()!=0);//等待发送完成
-  LOGI("NRF24L01_IRQ_PIN_READ is 0");
-
-	sta=NRF24L01_Read_Reg(STATUS);  //读取状态寄存器的值	   
-	NRF24L01_Write_Reg(NRF_WRITE_REG+STATUS,sta); //清除TX_DS或MAX_RT中断标志
-	if(sta&MAX_TX)//达到最大重发次数
+	while(NRF24L01_IRQ_PIN_READ()!=0);                   //等待发送完成
+	sta=NRF24L01_Read_Reg(STATUS);                       //读取状态寄存器的值	   
+	NRF24L01_Write_Reg(NRF_WRITE_REG+STATUS,sta);        //清除TX_DS或MAX_RT中断标志
+	if(sta&MAX_TX)                                       //达到最大重发次数
 	{
-		NRF24L01_Write_Reg(FLUSH_TX,0xff);//清除TX FIFO寄存器 
+		NRF24L01_Write_Reg(FLUSH_TX,0xff);                 //清除TX FIFO寄存器 
     LOGW("NRF24L01_TxPacket Max TX times");
+    printf("NRF24L01_TxPacket Max TX times!/r/n");
 		return MAX_TX; 
 	}
-	if(sta&TX_OK)//发送完成
+	if(sta&TX_OK)                                        //发送完成
 	{
     LOGI("NRF24L01_TxPacket Success");
+    printf("NRF24L01_TxPacket Success./r/n");
 		return TX_OK;
 	}
   LOGE("NRF24L01_TxPacket Fail");
-	return 0xff;//其他原因发送失败
+  printf("NRF24L01_TxPacket Fail/r/n");
+	return 0xff;                                         //其他原因发送失败
 }
 
 /**
@@ -224,4 +225,21 @@ void NRF24L01_TX_Mode(void)
   NRF24L01_Write_Reg(NRF_WRITE_REG+CONFIG,0x0e);    //配置基本工作模式的参数;PWR_UP,EN_CRC,16BIT_CRC,接收模式,开启所有中断
 	NRF24L01_CE_HIGH();//CE为高,10us后启动发送
   HAL_Delay(1);
+}
+
+/**
+  * 函数功能: 该函数通过串口打印NRF24L01将要发送的遥控器数据
+  * 输入参数: tx_buff
+  * 返 回 值: 无
+  * 说    明：无
+  *           
+  */ 
+void NRF24L01_TX_Buff_Printf(uint8_t* tx_buff)
+{
+  printf("CH1_X:%f\r\n",tx_buff[6]);
+  printf("CH1_Y:%f\r\n",tx_buff[7]);
+  printf("CH2_X:%f\r\n",tx_buff[8]);
+  printf("CH2_Y:%f\r\n",tx_buff[9]);
+  printf("Key Data:%d, %d, %d, %d, %d, %d\r\n",tx_buff[0],tx_buff[1],tx_buff[2],tx_buff[3],tx_buff[4],tx_buff[5]);
+
 }

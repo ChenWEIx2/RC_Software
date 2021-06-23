@@ -221,7 +221,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  Rocker_Data_Printf(&rocker_data,6);
+  NRF24L01_TX_Buff_Printf(nrf24l01_tx_buff);
 }
 /* USER CODE END 4 */
 

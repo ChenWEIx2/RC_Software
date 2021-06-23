@@ -4,6 +4,7 @@
 /* 包含头文件 ----------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "main.h"
+#include "usart.h"
 #include "log.h"
 
 /* 类型定义 ------------------------------------------------------------------*/
@@ -82,15 +83,15 @@ extern SPI_HandleTypeDef hspi2;
 /* 函数声明 ------------------------------------------------------------------*/
 
 void NRF24L01_SPI_Init(void);
-void NRF24L01_RX_Mode(void);					//配置为接收模式
-void NRF24L01_TX_Mode(void);					//配置为发送模式
+void NRF24L01_RX_Mode(void);					                             //配置为接收模式
+void NRF24L01_TX_Mode(void);					                             //配置为发送模式
+void NRF24L01_TX_Buff_Printf(uint8_t* tx_buff);                              //串口打印TX_BUFF
 uint8_t NRF24L01_Write_Buf(uint8_t reg, uint8_t *pBuf, uint8_t uint8_ts);    //写数据区
-uint8_t NRF24L01_Read_Buf(uint8_t reg, uint8_t *pBuf, uint8_t uint8_ts);	//读数据区		  
-uint8_t NRF24L01_Read_Reg(uint8_t reg);					    //读寄存器
-uint8_t NRF24L01_Write_Reg(uint8_t reg, uint8_t value);		//写寄存器
-uint8_t NRF24L01_Check(void);						        //检查24L01是否存在
-uint8_t NRF24L01_TxPacket(uint8_t *txbuf);				    //发送一个包的数据
-uint8_t NRF24L01_RxPacket(uint8_t *rxbuf);				    //接收一个包的数据
-
+uint8_t NRF24L01_Read_Buf(uint8_t reg, uint8_t *pBuf, uint8_t uint8_ts);	 //读数据区		  
+uint8_t NRF24L01_Read_Reg(uint8_t reg);					                     //读寄存器
+uint8_t NRF24L01_Write_Reg(uint8_t reg, uint8_t value);		                 //写寄存器
+uint8_t NRF24L01_Check(void);						                         //检查24L01是否存在
+uint8_t NRF24L01_TxPacket(uint8_t *txbuf);				                     //发送一个包的数据
+uint8_t NRF24L01_RxPacket(uint8_t *rxbuf);				                     //接收一个包的数据
 
 #endif 
