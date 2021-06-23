@@ -11,7 +11,7 @@ void Rocker_Data_Mapping(__Rocker_Data* rocker_data,volatile uint16_t* adc_data)
     rocker_data->ch2_y = *(adc_data + 3) * 3.3 / 4095; 
 }
 
-void Rocker_Data_Printf(__Rocker_Data* rocker_data,uint8_t n)
+void Rocker_Data_Log(__Rocker_Data* rocker_data,uint8_t n)
 {
     char buff1[10],buff2[10],buff3[10],buff4[10];
 

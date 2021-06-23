@@ -120,17 +120,17 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
   while(!unlock_flag)
   {
-    LOGW("Lock!");
+    printf("RC Lock!!!\r\n");
     unlock_flag = Unlock(adc_result);
     HAL_Delay(1000);
   }
   
   while(NRF24L01_Check())
 	{
-    LOGW("Can not find nrf24l01");
+    printf("Can not find nrf24l01!!!\r\n");
 		HAL_Delay(1000);
 	}
-  LOGI("NRF24L01 enter TX mode");
+  printf("NRF24L01 enter TX mode.\r\n");
   NRF24L01_TX_Mode();
 
   /* USER CODE END 2 */
@@ -159,12 +159,12 @@ int main(void)
     
     if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
     {
-      LOGI("Tx success");
+      printf("Tx success.\r\n");
       LED_Green_ON;
     }
     else
     {
-      LOGE("TX error");
+      printf("TX error!!!\r\n");
       LED_Green_OFF;
     } 
 
