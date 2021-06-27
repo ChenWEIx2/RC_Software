@@ -15,6 +15,9 @@ void FlashRead(uint32_t address, uint8_t* buffer, uint32_t size);
 uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size);
 uint8_t FlashWriteWithoutErase(uint32_t address, uint8_t* buffer, uint32_t size);
 
+void FlashCheckWrite(uint8_t* flash_buff,uint8_t* read_buff,uint8_t size);
+
+
 
 
 #endif
