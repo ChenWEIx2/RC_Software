@@ -71,6 +71,7 @@ User/Src/key_functions.c \
 User/Src/beep_functions.c \
 User/Src/rocker_functions.c \
 User/Src/unlock.c \
+User/Src/flash.c \
 RTT/SEGGER_RTT_printf.c \
 RTT/SEGGER_RTT.c
 
