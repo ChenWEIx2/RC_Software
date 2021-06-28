@@ -128,6 +128,11 @@ int main(void)
     offset_flag = Offset_Flag(adc_result);
     unlock_flag = Unlock_Flag(adc_result);
     
+    HAL_Delay(1000);
+
+    offset_flag = Offset_Flag(adc_result);
+    unlock_flag = Unlock_Flag(adc_result);
+    
     if(offset_flag)
     {
       printf("Do offset now!!! \r\n");
@@ -136,7 +141,6 @@ int main(void)
       UNLOCK_OR_OFFSET_BEEP;
     }
 
-    HAL_Delay(1000);
   }
   UNLOCK_OR_OFFSET_BEEP;    //unlock finish 
 
