@@ -149,10 +149,12 @@ int main(void)
     nrf24l01_tx_buff[3] = key_data.key_3;
     nrf24l01_tx_buff[4] = key_data.key_4;
     nrf24l01_tx_buff[5] = key_data.key_5;
+    /*
     nrf24l01_tx_buff[6] = rocker_data.ch1_x * 100;
     nrf24l01_tx_buff[7] = rocker_data.ch1_y * 100;
     nrf24l01_tx_buff[8] = rocker_data.ch2_x * 100;
     nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
+    */
     
     nrf24l01_tx_flag = 0;
     /* USER CODE END WHILE */
