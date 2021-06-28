@@ -36,6 +36,7 @@
 #include "rocker_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
+#include "task.h"
 
 /* USER CODE END Includes */
 
@@ -68,7 +69,7 @@ uint8_t task100_flag = 0;
 uint8_t task025_flag = 0;
 
 __Key_Data key_data;
-__Control_Data control_data;
+__RC_Data control_data;
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
@@ -211,8 +212,21 @@ int main(void)
 
     HAL_Delay(1000);
     */
-
-   
+   if(task500_flag)
+   {
+     Task_500Hz();       //get RC data
+     task500_flag = 0;
+   }
+   if(task100_flag)
+   {
+     Task_100Hz();
+     task100_flag = 0;
+   }
+   if(task025_flag)
+   {
+     Task_025Hz();
+     task025_flag = 0;
+   }
     
 
   }

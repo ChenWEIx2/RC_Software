@@ -11,11 +11,11 @@
 
 
 
-void Rocker_Data_ADC2Voltage(__Rocker_Data* rocker_data,volatile uint16_t* adc_data);
+void Rocker_Data_ADC2Voltage(__RC_Data* rc_data,volatile uint16_t* adc_data);
 
-void Rocker_Data_ADC2Control(__Control_Data* control_data,volatile uint16_t* adc_data);
+void Rocker_Data_ADC2Control(__RC_Data* rc_data,volatile uint16_t* adc_data);
 
-void Rocker_Data_Limit(__Control_Data* control_data);
+void Rocker_Data_Limit(__RC_Data* rc_data);
 
 uint8_t Unlock_Flag(volatile uint16_t* adc_result);
 

@@ -21,15 +21,6 @@ typedef struct
     
 }__Key_Data;
 
-typedef struct 
-{
-    float meanless1;
-    float meanless2;
-    float ch1_x;
-    float ch1_y;
-    float ch2_x;
-    float ch2_y;
-}__Rocker_Data;
 
 typedef struct
 {
@@ -37,7 +28,7 @@ typedef struct
   float roll;
   float yaw;
   float throttle;
-}__Control_Data;
+}__RC_Data;
 
 
 
