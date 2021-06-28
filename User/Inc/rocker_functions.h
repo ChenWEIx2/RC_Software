@@ -13,5 +13,6 @@ void Rocker_Data_ADC2Voltage(__Rocker_Data* rocker_data,volatile uint16_t* adc_d
 
 void Rocker_Data_ADC2Control(__Control_Data* control_data,volatile uint16_t* adc_data);
 
+void Rocker_Data_Limit(__Control_Data* control_data);
 
 #endif
