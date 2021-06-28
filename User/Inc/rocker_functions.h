@@ -9,10 +9,9 @@
 #include "log.h"
 
 
-void Rocker_Data_Mapping(__Rocker_Data* rocker_data,volatile uint16_t* adc_data);
+void Rocker_Data_ADC2Voltage(__Rocker_Data* rocker_data,volatile uint16_t* adc_data);
 
-void Rocker_Data_Log(__Rocker_Data* rocker_data,uint8_t n);
+void Rocker_Data_ADC2Control(__Control_Data* control_data,volatile uint16_t* adc_data);
 
-void float2char(float slope,char*buffer,int n);
 
 #endif

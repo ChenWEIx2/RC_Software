@@ -141,7 +141,7 @@ int main(void)
   while (1)
   {
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
-    Rocker_Data_Mapping(&rocker_data,adc_result);
+    Rocker_Data_ADC2Voltage(&rocker_data,adc_result);
 
     nrf24l01_tx_buff[0] = key_data.key_0;
     nrf24l01_tx_buff[1] = key_data.key_1;

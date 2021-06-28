@@ -33,13 +33,11 @@ typedef struct
 
 typedef struct
 {
-  double pithc;
-  double roll;
-  double yaw;
-
-  double horizontal_speed;
-  double vertical_speed;
-}__Kinetic_Data;
+  float pitch;
+  float roll;
+  float yaw;
+  float throttle;
+}__Control_Data;
 
 
 
