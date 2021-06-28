@@ -62,8 +62,12 @@ uint8_t unlock_flag = 0;
 uint8_t offset_flag = 0;
 uint8_t nrf24l01_tx_flag = 0;
 
+uint8_t task_counter = 0;
+uint8_t task500_flag = 0;
+uint8_t task100_flag = 0;
+uint8_t task025_flag = 0;
+
 __Key_Data key_data;
-__Rocker_Data rocker_data;
 __Control_Data control_data;
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
@@ -122,6 +126,27 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
 
 
+  //根据摇杆状态判断要不要do offset
+  //如果要，校准完毕后写入flash
+  //如果不需要，直接从flash读
+  /*
+  *offset_count = 0;
+  while(1)
+  {
+    offset_flag = Offset_Flag(adc_result);
+    HAL_Delay(1000);
+    offset_flag = offset_flag(adc_result);
+
+    if(offset_flag & offset_flag <= 50)
+    {
+      Do_Offset(&offset_data,offset_count);
+    }
+    else
+    {
+      break;
+    }
+  }
+  */
 
   while(!unlock_flag)
   {
@@ -149,8 +174,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    /*
     Key_Data_Write(GPIOB,Key_Pin,&key_data);
-    Rocker_Data_ADC2Voltage(&rocker_data,adc_result);
+    Rocker_Data_ADC2Control(&control_data,adc_result);
 
     nrf24l01_tx_buff[0] = key_data.key_0;
     nrf24l01_tx_buff[1] = key_data.key_1;
@@ -164,10 +190,12 @@ int main(void)
     nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
     
     nrf24l01_tx_flag = 0;
+    */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
     
+    /*
     if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
     {
       printf("Tx success.\r\n");
@@ -182,6 +210,9 @@ int main(void)
     } 
 
     HAL_Delay(1000);
+    */
+
+   
     
 
   }
@@ -232,12 +263,26 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+/*0.001s once*/
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  if(nrf24l01_tx_flag)
+  task_counter++;
+  if(task_counter%2 == 0) 
+    task500_flag = 1;
+  else if(task_counter%10 == 0)
+    task100_flag = 1;
+  else if(task_counter%40 == 0)
   {
-    NRF24L01_TX_Buff_Printf(nrf24l01_tx_buff);
+    task025_flag = 1;
+    task_counter = 0;
   }
+  else
+  {
+    task500_flag = 0;
+    task100_flag = 0;
+    task025_flag = 0;
+  }
+
 }
 /* USER CODE END 4 */
 

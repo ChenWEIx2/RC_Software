@@ -38,6 +38,8 @@ void Rocker_Data_Limit(__Control_Data* control_data)
 
 }
 
+
+
 uint8_t Unlock_Flag(volatile uint16_t* adc_result)
 {
     uint8_t flag = (adc_result[0]>4000) && (adc_result[1]<4000) && (adc_result[2]>4000) && (adc_result[3]>4000);
