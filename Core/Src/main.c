@@ -33,10 +33,10 @@
 
 #include "led_functions.h"
 #include "key_functions.h"
+#include "beep_functions.h"
 #include "rocker_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
-#include "unlock.h"
 
 /* USER CODE END Includes */
 
@@ -119,12 +119,14 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
+  /*
   while(!unlock_flag)
   {
     printf("RC Lock!!!\r\n");
     unlock_flag = Unlock(adc_result);
     HAL_Delay(1000);
   }
+  */
   
   while(NRF24L01_Check())
 	{

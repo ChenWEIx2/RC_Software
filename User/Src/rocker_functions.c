@@ -28,10 +28,19 @@ void Rocker_Data_Limit(__Rocker_Data* rocker_data)
 
     rocker_data->roll = (rocker_data->roll <= 1000)? 1000:rocker_data->roll;
     rocker_data->roll = (rocker_data->roll >= 2000)? 2000:rocker_data->roll;
-    
+
     rocker_data->pitch = (rocker_data->pitch <= 1000)? 1000:rocker_data->pitch;
     rocker_data->pitch = (rocker_data->pitch >= 2000)? 2000:rocker_data->pitch;
 
     rocker_data->throttle = (rocker_data->throttle <= 1000)? 1000:rocker_data->throttle;
     rocker_data->throttle = (rocker_data->throttle >= 2000)? 2000:rocker_data->throttle;
+}
+
+uint8_t Unlock_Flag(__Rocker_Data rocker_data)
+{
+    uint8_t flag = (rocker_data.pitch > 1800.0) &
+                   (rocker_data.roll > 1800.0) &
+                   (rocker_data.throttle > 1800.0) &
+                   (rocker_data.yaw < 1200.0);
+    return flag;
 }
