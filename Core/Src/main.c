@@ -62,6 +62,11 @@ uint8_t nrf24l01_tx_buff[33];
 uint8_t unlock_flag = 0;
 uint8_t nrf24l01_tx_flag = 0;
 
+uint8_t task_counter = 0;
+uint8_t task_25hz_flag = 0;
+uint8_t task_100hz_flag = 0;
+uint8_t task_500hz_flag = 0;
+
 __Key_Data key_data;
 __Rocker_Data rocker_data;
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
@@ -229,9 +234,21 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  if(nrf24l01_tx_flag)
+  task_counter++;
+  if(task_counter%2 == 0) 
+    task_500hz_flag = 1;
+  else if(task_counter%10 == 0)
+    task_100hz_flag = 1;
+  else if(task_counter%40 == 0)
   {
-    NRF24L01_TX_Buff_Printf(nrf24l01_tx_buff);
+    task_25hz_flag = 1;
+    task_counter = 0;
+  }
+  else
+  {
+    task_500hz_flag = 0;
+    task_100hz_flag = 0;
+    task_25hz_flag = 0;
   }
 }
 /* USER CODE END 4 */
