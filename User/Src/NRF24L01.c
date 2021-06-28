@@ -236,10 +236,10 @@ void NRF24L01_TX_Mode(void)
   */ 
 void NRF24L01_TX_Buff_Printf(uint8_t* tx_buff)
 {
-  printf("CH1_X:%f\r\n",tx_buff[6]);
-  printf("CH1_Y:%f\r\n",tx_buff[7]);
-  printf("CH2_X:%f\r\n",tx_buff[8]);
-  printf("CH2_Y:%f\r\n",tx_buff[9]);
+  printf("CH1_X:%d\r\n",tx_buff[6]);
+  printf("CH1_Y:%d\r\n",tx_buff[7]);
+  printf("CH2_X:%d\r\n",tx_buff[8]);
+  printf("CH2_Y:%d\r\n",tx_buff[9]);
   printf("Key Data:%d, %d, %d, %d, %d, %d\r\n",tx_buff[0],tx_buff[1],tx_buff[2],tx_buff[3],tx_buff[4],tx_buff[5]);
 
 }
