@@ -36,7 +36,6 @@
 #include "rocker_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
-#include "unlock.h"
 
 /* USER CODE END Includes */
 
@@ -121,29 +120,20 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
+
+
+
   while(!unlock_flag)
   {
     printf("RC Lock!!!\r\n");
 
-    offset_flag = Offset_Flag(adc_result);
     unlock_flag = Unlock_Flag(adc_result);
-    
     HAL_Delay(1000);
-
-    offset_flag = Offset_Flag(adc_result);
-    unlock_flag = Unlock_Flag(adc_result);
-    
-    if(offset_flag)
-    {
-      printf("Do offset now!!! \r\n");
-
-
-      UNLOCK_OR_OFFSET_BEEP;
-    }
+    unlock_flag = Unlock_Flag(adc_result); 
 
   }
   UNLOCK_OR_OFFSET_BEEP;    //unlock finish 
-
+  printf("RC Unlock!!! \r\n");
   
   while(NRF24L01_Check())
 	{
