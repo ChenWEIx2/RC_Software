@@ -1,7 +1,4 @@
-
-
-
-#include "rocker_functions.h"
+#include "rc_functions.h"
 
 void Rocker_Data_ADC2Voltage(__RC_Data* rc_data,volatile uint16_t* adc_data)
 {

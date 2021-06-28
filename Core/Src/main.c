@@ -33,7 +33,7 @@
 
 #include "led_functions.h"
 #include "key_functions.h"
-#include "rocker_functions.h"
+#include "rc_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
 #include "task.h"
@@ -69,7 +69,7 @@ uint8_t task100_flag = 0;
 uint8_t task025_flag = 0;
 
 __Key_Data key_data;
-__RC_Data control_data;
+__RC_Data rc_data;
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
@@ -214,17 +214,17 @@ int main(void)
     */
    if(task500_flag)
    {
-     Task_500Hz();       //get RC data
+     Task_500Hz(&rc_data,adc_result,Key_Pin,&key_data);       //get RC data
      task500_flag = 0;
    }
    if(task100_flag)
    {
-     Task_100Hz();
+     //Task_100Hz();
      task100_flag = 0;
    }
    if(task025_flag)
    {
-     Task_025Hz();
+     //Task_025Hz();
      task025_flag = 0;
    }
     

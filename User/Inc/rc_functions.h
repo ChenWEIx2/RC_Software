@@ -1,9 +1,5 @@
-
-
-
-
-#ifndef __ROCKER_FUNCTIONS_H
-#define __ROCKER_FUNCTIONS_H
+#ifndef __RC_FUNCTIONS_H
+#define __RC_FUNCTIONS_H
 
 #include "beep_functions.h"
 #include "rc_struct.h"

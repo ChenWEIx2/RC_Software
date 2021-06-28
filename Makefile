@@ -69,7 +69,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
 User/Src/NRF24L01.c \
 User/Src/key_functions.c \
 User/Src/beep_functions.c \
-User/Src/rocker_functions.c \
+User/Src/rc_functions.c \
 User/Src/flash.c \
 User/Src/task.c \
 RTT/SEGGER_RTT_printf.c \
