@@ -60,10 +60,12 @@
 volatile uint16_t adc_result[4];
 uint8_t nrf24l01_tx_buff[33];
 uint8_t unlock_flag = 0;
+uint8_t offset_flag = 0;
 uint8_t nrf24l01_tx_flag = 0;
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
+__Control_Data control_data;
 uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
@@ -122,9 +124,22 @@ int main(void)
   while(!unlock_flag)
   {
     printf("RC Lock!!!\r\n");
-    unlock_flag = Unlock(adc_result);
+
+    offset_flag = Offset_Flag(adc_result);
+    unlock_flag = Unlock_Flag(adc_result);
+    
+    if(offset_flag)
+    {
+      printf("Do offset now!!! \r\n");
+
+
+      UNLOCK_OR_OFFSET_BEEP;
+    }
+
     HAL_Delay(1000);
   }
+  UNLOCK_OR_OFFSET_BEEP;    //unlock finish 
+
   
   while(NRF24L01_Check())
 	{

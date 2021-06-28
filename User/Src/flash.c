@@ -76,7 +76,7 @@ uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size)
 void FlashCheckWrite(uint8_t* flash_buff,uint8_t* read_buff,uint8_t size)
 {
   FLASH_READ_SECTOR5(read_buff,size);
-  if(result_buff[0] == 0xEF)
+  if(read_buff[0] == 0xEF)
   {
     printf("Flash data exited!\r\n");
   }
