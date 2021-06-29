@@ -206,21 +206,25 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
   task_counter++;
+  
   if(task_counter%2 == 0) 
     task_500hz_flag = 1;
-  else if(task_counter%10 == 0)
+  else
+    task_500hz_flag = 0;
+
+  if(task_counter%10 == 0)
     task_100hz_flag = 1;
-  else if(task_counter%40 == 0)
+  else
+    task_100hz_flag = 0;
+  
+  if(task_counter%40 == 0)
   {
     task_25hz_flag = 1;
     task_counter = 0;
   }
   else
-  {
-    task_500hz_flag = 0;
-    task_100hz_flag = 0;
     task_25hz_flag = 0;
-  }
+
 }
 /* USER CODE END 4 */
 
