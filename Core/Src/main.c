@@ -59,9 +59,7 @@
 
 /* USER CODE BEGIN PV */
 volatile uint16_t adc_result[4];
-uint8_t nrf24l01_tx_buff[33];
 uint16_t offset_data[4];
-uint8_t nrf24l01_tx_flag = 0;
 
 uint8_t task_counter = 0;
 uint8_t task_25hz_flag = 0;
@@ -126,67 +124,17 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
-  /*
-  while(!unlock_flag)
-  {
-    printf("RC Lock!!!\r\n");
-    unlock_flag = Unlock(adc_result);
-    HAL_Delay(1000);
-  }
-  */
   
-  while(NRF24L01_Check())
-	{
-    printf("Can not find nrf24l01!!!\r\n");
-		HAL_Delay(1000);
-	}
-  printf("NRF24L01 enter TX mode.\r\n");
-  NRF24L01_TX_Mode();
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /*
-    Key_Data_Write(GPIOB,Key_Pin,&key_data);
-    Rocker_Data_ADC2Voltage(&rocker_data,adc_result);
-
-    nrf24l01_tx_buff[0] = key_data.key_0;
-    nrf24l01_tx_buff[1] = key_data.key_1;
-    nrf24l01_tx_buff[2] = key_data.key_2;
-    nrf24l01_tx_buff[3] = key_data.key_3;
-    nrf24l01_tx_buff[4] = key_data.key_4;
-    nrf24l01_tx_buff[5] = key_data.key_5;
-    
-    nrf24l01_tx_buff[6] = rocker_data.ch1_x * 100;
-    nrf24l01_tx_buff[7] = rocker_data.ch1_y * 100;
-    nrf24l01_tx_buff[8] = rocker_data.ch2_x * 100;
-    nrf24l01_tx_buff[9] = rocker_data.ch2_y * 100;
-    */
-    
-    nrf24l01_tx_flag = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
     
-    /*
-    if(NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK)
-    {
-      printf("Tx success.\r\n");
-      nrf24l01_tx_flag = 1;
-      LED_Green_ON;
-    }
-    else
-    {
-      printf("TX error!!!\r\n");
-      nrf24l01_tx_flag = 0;
-      LED_Green_OFF;
-    } 
-
-    HAL_Delay(1000);
-    */
     if(task_500hz_flag)
     {
       printf("Task 500Hz : Processing rc data.\r\n");
@@ -196,6 +144,7 @@ int main(void)
     if(task_100hz_flag)
     {
       printf("Task 100HZ : Transmitting rc data by NRF24L01.\r\n");
+      Task_100Hz(rocker_data,key_data);
       task_100hz_flag = 0;
     }
     if(task_25hz_flag)

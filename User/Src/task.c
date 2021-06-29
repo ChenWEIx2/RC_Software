@@ -11,6 +11,62 @@ void Task_25Hz(__Key_Data key_data,__Rocker_Data rocker_data)
 }
 
 
+void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data)
+{
+    uint8_t nrf24l01_tx_buff[33];
+    uint8_t nrf24l01_flag = 0;
+    uint8_t nrf24l01_check_count = 0;
+        
+    nrf24l01_tx_buff[0] = key_data.key_0;
+    nrf24l01_tx_buff[1] = key_data.key_1;
+    nrf24l01_tx_buff[2] = key_data.key_2;
+    nrf24l01_tx_buff[3] = key_data.key_3;
+    nrf24l01_tx_buff[4] = key_data.key_4;
+    nrf24l01_tx_buff[5] = key_data.key_5;
+
+    nrf24l01_tx_buff[6] = (uint8_t) (rocker_data.pitch * 0.01);       //Thousand digit + Hundered digit
+    nrf24l01_tx_buff[7] = (uint8_t) (rocker_data.pitch % 100);        //Ten digit + Seat digit 
+
+    nrf24l01_tx_buff[8] = (uint8_t) (rocker_data.roll * 0.01);        //Thousand digit + Hundered digit
+    nrf24l01_tx_buff[9] = (uint8_t) (rocker_data.roll % 100);         //Ten digit + Seat digit
+    
+    nrf24l01_tx_buff[10] = (uint8_t) (rocker_data.throttle * 0.01);   //Thousand digit + Hundered digit 
+    nrf24l01_tx_buff[11] = (uint8_t) (rocker_data.throttle % 100);    //Ten digit + Seat digit
+
+    nrf24l01_tx_buff[12] = (uint8_t) (rocker_data.yaw * 0.01);        //Thousand digit + Hundered digit
+    nrf24l01_tx_buff[13] = (uint8_t) (rocker_data.yaw % 100);         //Ten digit + Seat digit
+
+    while(nrf24l01_check_count++ < 11)                 //Check nrf24l01
+	{
+        if(NRF24L01_Check())
+        {
+            nrf24l01_flag = 1;
+            NRF24L01_TX_Mode();
+            printf("NRF24L01 enter TX mode.\r\n");
+            break;
+        }
+        else
+        {
+            printf("Can not find nrf24l01!!!\r\n");
+            nrf24l01_flag = 0;
+		    HAL_Delay(1000);
+        }
+	}
+
+    if(nrf24l01_flag && (NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK))
+    {
+      printf("Tx success.\r\n");
+      LED_Green_ON;
+    }
+    else
+    {
+      printf("TX error!!!\r\n");
+      LED_Green_OFF;
+    } 
+ 
+}
+
+
 void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_Data* key_data,uint16_t* key_Pin,__Start__Flag* start_flag,uint16_t* offset_data)
 {
     //Get key and rocker data;
