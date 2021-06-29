@@ -15,7 +15,7 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
 {
     //Get key and rocker data;
     Key_Data_Write(GPIOB,key_Pin,key_data);
-    Rocker_Data_ADC2Control(rocker_data,adc_result,offset_data);
+    Rocker_Data_ADC2Control(rocker_data,adc_result,offset_data,start_flag->offset_finish_flag);
 
     //unlock
     if(!start_flag->unlock_finish_flag)
@@ -40,8 +40,8 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
             start_flag->offset_finish_flag = 1;
             start_flag->offset_counter = 0;
             //do offset
+            //Do_Offset(*rocker_data,offset_data,start_flag->do_offset_counter);
         }
-
     }
     
 }
