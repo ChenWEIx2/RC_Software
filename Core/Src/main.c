@@ -69,8 +69,8 @@ uint8_t task_500hz_flag = 0;
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
-__Unlock_Offset_Flag unlock_offset_flag;
-uint16_t Key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
+__Start__Flag start_flag;
+uint16_t key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
 
@@ -189,6 +189,7 @@ int main(void)
     if(task_500hz_flag)
     {
       printf("Task 500Hz : Processing rc data.\r\n");
+      Task_500Hz(&rocker_data,adc_result,&key_data,key_Pin,&start_flag);
       task_500hz_flag = 0;
     }
     if(task_100hz_flag)

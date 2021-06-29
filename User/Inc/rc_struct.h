@@ -40,7 +40,7 @@ typedef struct
   uint8_t offset_finish_flag;
 
   uint8_t counter;
-}__Unlock_Offset_Flag;
+}__Start__Flag;
 
 
 
