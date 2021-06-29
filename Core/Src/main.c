@@ -37,6 +37,7 @@
 #include "rocker_functions.h"
 #include "log.h"
 #include "NRF24L01.h"
+#include "task.h"
 
 /* USER CODE END Includes */
 
@@ -198,6 +199,7 @@ int main(void)
     if(task_25hz_flag)
     {
       printf("Task 25HZ : Printf rc data.\r\n");
+      Task_25Hz(key_data,rocker_data);
       task_25hz_flag = 0;
     }
     
