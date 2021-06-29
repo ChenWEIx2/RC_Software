@@ -23,12 +23,12 @@ typedef struct
 
 typedef struct 
 {
-    float meanless1;
-    float meanless2;
-    float pitch;
-    float roll;
-    float throttle;
-    float yaw;
+    uint16_t meanless1;
+    uint16_t meanless2;
+    uint16_t pitch;
+    uint16_t roll;
+    uint16_t throttle;
+    uint16_t yaw;
 }__Rocker_Data;
 
 typedef struct
@@ -39,7 +39,8 @@ typedef struct
   uint8_t unlock_finish_flag;
   uint8_t offset_finish_flag;
 
-  uint16_t counter;
+  uint16_t unlock_counter;
+  uint16_t offset_counter;
 }__Start__Flag;
 
 

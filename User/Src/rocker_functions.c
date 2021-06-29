@@ -12,12 +12,12 @@ void Rocker_Data_ADC2Voltage(__Rocker_Data* rocker_data,volatile uint16_t* adc_d
 }
 
 
-void Rocker_Data_ADC2Control(__Rocker_Data* rocker_data,volatile uint16_t* adc_data)
+void Rocker_Data_ADC2Control(__Rocker_Data* rocker_data,volatile uint16_t* adc_data,uint16_t* offset_data)
 {
-    rocker_data->pitch    = 1000 + (uint16_t)(0.25f * adc_data[0]);// - offset_pitch;   
-    rocker_data->roll     = 2000 - (uint16_t)(0.25f * adc_data[1]);// - offset_roll;
-    rocker_data->throttle = 2000 - (uint16_t)(0.25f * adc_data[2]);// - offset_throttle;
-    rocker_data->yaw      = 1000 + (uint16_t)(0.25f * adc_data[3]);// - offset_yaw;
+    rocker_data->pitch    = 1000 + (uint16_t)(0.25f * adc_data[0]) - offset_data[0];   
+    rocker_data->roll     = 2000 - (uint16_t)(0.25f * adc_data[1]) - offset_data[1];
+    rocker_data->throttle = 2000 - (uint16_t)(0.25f * adc_data[2]) - offset_data[2];
+    rocker_data->yaw      = 1000 + (uint16_t)(0.25f * adc_data[3]) - offset_data[3];
 
     Rocker_Data_Limit(rocker_data);
 }
@@ -45,4 +45,13 @@ uint8_t Unlock_Flag(__Rocker_Data rocker_data)
                    (rocker_data.throttle > 1800.0) &
                    (rocker_data.yaw < 1200.0);
     return flag;
+}
+
+uint8_t Offset_Flag(__Rocker_Data rocker_data)
+{
+    uint8_t flag = (rocker_data.pitch > 1800.0) &
+                   (rocker_data.roll < 1200.0) &
+                   (rocker_data.throttle > 1800.0) &
+                   (rocker_data.yaw > 1800.0);
+    return flag;   
 }

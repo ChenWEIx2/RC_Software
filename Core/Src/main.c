@@ -60,6 +60,7 @@
 /* USER CODE BEGIN PV */
 volatile uint16_t adc_result[4];
 uint8_t nrf24l01_tx_buff[33];
+uint16_t offset_data[4];
 uint8_t nrf24l01_tx_flag = 0;
 
 uint8_t task_counter = 0;
@@ -189,7 +190,7 @@ int main(void)
     if(task_500hz_flag)
     {
       printf("Task 500Hz : Processing rc data.\r\n");
-      Task_500Hz(&rocker_data,adc_result,&key_data,key_Pin,&start_flag);
+      Task_500Hz(&rocker_data,adc_result,&key_data,key_Pin,&start_flag,offset_data);
       task_500hz_flag = 0;
     }
     if(task_100hz_flag)
