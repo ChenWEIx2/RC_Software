@@ -31,6 +31,16 @@ typedef struct
     float yaw;
 }__Rocker_Data;
 
+typedef struct
+{
+  uint8_t unlock_flag;
+  uint8_t offset_flag;
+
+  uint8_t unlock_finish_flag;
+  uint8_t offset_finish_flag;
+
+  uint8_t counter;
+}__Unlock_Offset_Flag;
 
 
 
