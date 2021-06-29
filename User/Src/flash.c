@@ -1,12 +1,12 @@
 #include "flash.h"
 
 
-void FlashRead(uint32_t address, uint8_t* buffer, uint32_t size)
+void FlashRead(uint32_t address, uint16_t* buffer, uint32_t size)
 {
     uint8_t i;
     for(i = 0;i < size;i++)
     {
-        buffer[i] = *(volatile uint8_t*) (address + i);
+        buffer[i] = *(volatile uint16_t*) (address + i);
     }
     printf("Read Successfully!\r\n");
 }
@@ -37,7 +37,7 @@ uint8_t FlashEraseSector5()
     }
 }
 
-uint8_t FlashWriteWithoutErase(uint32_t address, uint8_t* buffer, uint32_t size)
+uint8_t FlashWriteWithoutErase(uint32_t address, uint16_t* buffer, uint32_t size)
 {
     HAL_StatusTypeDef hal_sta = HAL_OK;
 	uint32_t          pos = 0;
@@ -52,7 +52,7 @@ uint8_t FlashWriteWithoutErase(uint32_t address, uint8_t* buffer, uint32_t size)
 	else return 0;
 }
 
-uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size)
+uint8_t FlashWrite(uint32_t address, uint16_t* buffer, uint32_t size)
 {
     uint8_t write_flag;
     
@@ -64,28 +64,4 @@ uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size)
 
     return write_flag;
 }
-
-
-/**
- * @brief Check Sector5 have written data or not,then read from it.
- *        If data exist,read it to read_buff;
- *        If data do not exist,write flash_buff to it,then read it to read_buff.
- * 
- */
-
-void FlashCheckWrite(uint8_t* flash_buff,uint8_t* read_buff,uint8_t size)
-{
-  FLASH_READ_SECTOR5(read_buff,size);
-  if(read_buff[0] == 0xEF)
-  {
-    printf("Flash data exited!\r\n");
-  }
-  else
-  {
-    printf("Flash data empty!\r\nBeging to write!\r\n");
-    FLASH_WRITE_SECTOR5(flash_buff,size);
-  }
-  FLASH_READ_SECTOR5(read_buff,size);
-}
-
 

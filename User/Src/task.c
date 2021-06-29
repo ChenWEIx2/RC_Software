@@ -28,6 +28,7 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
             start_flag->unlock_finish_flag = 1;
             start_flag->unlock_counter = 0;
 
+            FLASH_READ_SECTOR5(offset_data,4);
             UNLOCK_BEEP;
         }
     }
@@ -46,7 +47,11 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
             start_flag->offset_counter = 0;            
         }
 
-        if(start_flag->offset_finish_flag) UNLOCK_BEEP;     //end do offset
+        if(start_flag->offset_finish_flag)    //end do offset
+        {
+            FLASH_WRITE_SECTOR5(offset_data,4);
+            UNLOCK_BEEP; 
+        } 
     }
     
 }

@@ -11,11 +11,10 @@
 #define FLASH_WRITE_SECTOR5(Buffer,Size)  FlashWrite(SECTOR5_ADDR,Buffer,Size)
 
 uint8_t FlashEraseSector5();
-void FlashRead(uint32_t address, uint8_t* buffer, uint32_t size);
-uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size);
-uint8_t FlashWriteWithoutErase(uint32_t address, uint8_t* buffer, uint32_t size);
+void FlashRead(uint32_t address, uint16_t* buffer, uint32_t size);
+uint8_t FlashWrite(uint32_t address, uint16_t* buffer, uint32_t size);
+uint8_t FlashWriteWithoutErase(uint32_t address, uint16_t* buffer, uint32_t size);
 
-void FlashCheckWrite(uint8_t* flash_buff,uint8_t* read_buff,uint8_t size);
 
 
 
