@@ -69,7 +69,6 @@ uint8_t Do_Offset(__Rocker_Data rocker_data,uint16_t* offset_data,uint8_t* count
         offset_data[2] = (uint16_t) (offset_data[2]/(*count));
         offset_data[3] = (uint16_t) (offset_data[3]/(*count));
 
-        (*count) = 0;
         return 1;
     }
     return 0;
@@ -86,11 +85,11 @@ uint8_t Unlock_Flag(__Rocker_Data rocker_data)
 }
 
 
-uint8_t Offset_Flag(__Rocker_Data rocker_data)
+uint8_t Offset_Flag(__Key_Data key_data)
 {
-    uint8_t flag = (rocker_data.pitch > 1800.0) &
-                   (rocker_data.roll < 1200.0) &
-                   (rocker_data.throttle > 1800.0) &
-                   (rocker_data.yaw > 1800.0);
+    uint8_t flag = key_data.key_0 &
+                   key_data.key_1 &
+                   key_data.key_2 &
+                   key_data.key_3;
     return flag;   
 }

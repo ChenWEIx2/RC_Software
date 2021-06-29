@@ -19,7 +19,7 @@ uint8_t Do_Offset(__Rocker_Data rocker_data,uint16_t* offset_data,uint8_t* count
 
 uint8_t Unlock_Flag(__Rocker_Data rocker_data);
 
-uint8_t Offset_Flag(__Rocker_Data rocker_data);
+uint8_t Offset_Flag(__Key_Data key_data);
 
 
 #endif
