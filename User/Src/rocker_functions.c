@@ -18,6 +18,8 @@ void Rocker_Data_ADC2Control(__Rocker_Data* rocker_data,volatile uint16_t* adc_d
     rocker_data->roll     = 2000 - (uint16_t)(0.25f * adc_data[1]);// - offset_roll;
     rocker_data->throttle = 2000 - (uint16_t)(0.25f * adc_data[2]);// - offset_throttle;
     rocker_data->yaw      = 1000 + (uint16_t)(0.25f * adc_data[3]);// - offset_yaw;
+
+    Rocker_Data_Limit(rocker_data);
 }
 
 

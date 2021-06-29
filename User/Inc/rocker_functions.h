@@ -15,5 +15,7 @@ void Rocker_Data_ADC2Control(__Rocker_Data* rocker_data,volatile uint16_t* adc_d
 
 void Rocker_Data_Limit(__Rocker_Data* rocker_data);
 
+uint8_t Unlock_Flag(__Rocker_Data rocker_data);
+
 
 #endif
