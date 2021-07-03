@@ -58,8 +58,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED1_Pin GPIO_PIN_13
-#define LED1_GPIO_Port GPIOC
+#define Back_Fine_Tune_Key_Pin GPIO_PIN_7
+#define Back_Fine_Tune_Key_GPIO_Port GPIOA
+#define Front_Fine_Tune_Key_Pin GPIO_PIN_0
+#define Front_Fine_Tune_Key_GPIO_Port GPIOB
+#define LED1_Pin GPIO_PIN_1
+#define LED1_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_2
+#define LED2_GPIO_Port GPIOB
 #define NRF24L01_CE_Pin GPIO_PIN_10
 #define NRF24L01_CE_GPIO_Port GPIOB
 #define NRF24L01_CS_Pin GPIO_PIN_12
@@ -72,22 +78,16 @@ void Error_Handler(void);
 #define NRF24L01_SPI_MOSI_GPIO_Port GPIOB
 #define NRF24L01_IRQ_Pin GPIO_PIN_8
 #define NRF24L01_IRQ_GPIO_Port GPIOA
-#define Beep_Pin GPIO_PIN_12
+#define Left_Key_Pin GPIO_PIN_9
+#define Left_Key_GPIO_Port GPIOA
+#define Right_Key_Pin GPIO_PIN_10
+#define Right_Key_GPIO_Port GPIOA
+#define Beep_Pin GPIO_PIN_15
 #define Beep_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_15
-#define LED2_GPIO_Port GPIOA
-#define Front_Fine_Tune_Key_Pin GPIO_PIN_3
-#define Front_Fine_Tune_Key_GPIO_Port GPIOB
-#define Left_Fine_Tune_Key_Pin GPIO_PIN_4
-#define Left_Fine_Tune_Key_GPIO_Port GPIOB
-#define Back_Fine_Tune_Key_Pin GPIO_PIN_5
-#define Back_Fine_Tune_Key_GPIO_Port GPIOB
 #define Right_Fine_Tune_Key_Pin GPIO_PIN_6
 #define Right_Fine_Tune_Key_GPIO_Port GPIOB
-#define Right_Key_Pin GPIO_PIN_7
-#define Right_Key_GPIO_Port GPIOB
-#define Left_Key_Pin GPIO_PIN_8
-#define Left_Key_GPIO_Port GPIOB
+#define Left_Fine_Tune_Key_Pin GPIO_PIN_7
+#define Left_Fine_Tune_Key_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
