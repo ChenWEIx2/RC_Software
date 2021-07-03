@@ -112,8 +112,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 /* USER CODE BEGIN 1 */
 int __io_putchar(int ch)
 {
-    while ((USART1->SR & 0X40) == 0);
-    USART1->DR = (uint8_t) ch;
+    while ((USART6->SR & 0X40) == 0);
+    USART6->DR = (uint8_t) ch;
     return ch;
 }
 

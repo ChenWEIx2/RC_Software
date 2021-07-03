@@ -58,7 +58,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile uint16_t adc_result[4];
+volatile uint16_t adc_result[5];
 uint16_t offset_data[4];
 
 uint8_t task_counter = 0;
@@ -121,9 +121,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
   POWER_ON_BEEP;
   
-  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim2);  //使能定时器中断
+	HAL_TIM_Base_Start(&htim2);     //启动定时器
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
+
+  LED_Red_OFF;
+  LED_Green_OFF;
   
   /* USER CODE END 2 */
 
@@ -141,18 +145,21 @@ int main(void)
       Task_500Hz(&rocker_data,adc_result,&key_data,key_Pin,&start_flag,offset_data);
       task_500hz_flag = 0;
     }
-    if(task_100hz_flag)
+    
+    if(task_100hz_flag && start_flag.offset_finish_flag && start_flag.unlock_finish_flag)
     {
       printf("Task 100HZ : Transmitting rc data by NRF24L01.\r\n");
       Task_100Hz(rocker_data,key_data);
       task_100hz_flag = 0;
     }
+    
     if(task_25hz_flag)
     {
       printf("Task 25HZ : Printf rc data.\r\n");
       Task_25Hz(key_data,rocker_data);
       task_25hz_flag = 0;
     }
+    
     
 
   }
@@ -205,8 +212,11 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
 {
-  task_counter++;
-  
+  HAL_TIM_IRQHandler(&htim2);
+
+  //if(!(task_500hz_flag || task_100hz_flag || task_25hz_flag))
+    task_counter++;
+
   if(task_counter%2 == 0) 
     task_500hz_flag = 1;
   else
@@ -223,7 +233,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
     task_counter = 0;
   }
   else
-    task_25hz_flag = 0;
+    task_25hz_flag = 0;  
 
 }
 /* USER CODE END 4 */
