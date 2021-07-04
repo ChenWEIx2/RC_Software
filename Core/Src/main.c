@@ -69,7 +69,7 @@ __Rocker_Data rocker_data;
 __Start__Flag start_flag;
 
 volatile uint16_t adc_result[5];
-int16_t offset_data[4] = {0,0,0,0};
+int16_t offset_data[8] = {0,0,0,0};
 uint16_t key_pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};

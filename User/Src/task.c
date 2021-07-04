@@ -69,6 +69,8 @@ void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data)
 
 void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_Data* key_data,uint16_t* key_Pin,__Start__Flag* start_flag,int16_t* offset_data)
 {
+    uint8_t offset_temp[8] = {0,0,0,0,0,0,0,0};
+
     //Get key and rocker data;
     Key_Data_Write(key_Pin,key_data);
     Rocker_Data_ADC2Control(rocker_data,adc_result,offset_data,start_flag->offset_finish_flag);
@@ -83,9 +85,14 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
             start_flag->unlock_finish_flag = 1;
             start_flag->unlock_counter = 0;
 
-            //FLASH_READ_SECTOR5(offset_data,4);
+            FLASH_READ_SECTOR5(offset_temp,8);
+            offset_data[0] = (int16_t)(offset_temp[0]) * (int16_t)(offset_temp[4]-1);
+            offset_data[1] = (int16_t)(offset_temp[1]) * (int16_t)(offset_temp[5]-1);
+            offset_data[2] = (int16_t)(offset_temp[2]) * (int16_t)(offset_temp[6]-1);
+            offset_data[3] = (int16_t)(offset_temp[3]) * (int16_t)(offset_temp[7]-1);
+
             UNLOCK_BEEP;
-            printf("Offset data:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
+            printf("Unlock finish and Get offset data:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
         }
     }
     
@@ -121,7 +128,6 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
         if(start_flag->right_offset_counter >= 50 && !(start_flag->right_offset_finish_flag))  //1s
         {
             start_flag->right_offset_finish_flag = Do_Right_Offset(rocker_data,offset_data,&(start_flag->do_right_offset_counter));
-            printf("Right Offset now \r\n");
             UNLOCK_BEEP;
         }
  
@@ -129,25 +135,21 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
         if(start_flag->left_offset_counter >= 50 && (start_flag->right_offset_finish_flag) && !(start_flag->left_offset_finish_flag))
         {
             start_flag->left_offset_finish_flag = Do_Left_Offset(rocker_data,offset_data,&(start_flag->do_left_offset_counter));
-            printf("Left Offset now \r\n");
             UNLOCK_BEEP;
         }
 
         start_flag->offset_finish_flag = start_flag->right_offset_finish_flag & start_flag->left_offset_finish_flag;
         if(start_flag->offset_finish_flag)
         {
-            uint16_t offset_temp[8];
             for(uint8_t i=0 ;i<4; i++)
             {
                 offset_temp[i] = abs(offset_data[i]);
                 offset_temp[i+4] = (offset_data[i] > 0)? 2:0;
             }
             FLASH_WRITE_SECTOR5(offset_temp,8);
-        }
-        
-        printf("Offset:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
-        printf("do offset count:%d,%d\r\n",start_flag->do_right_offset_counter,start_flag->do_left_offset_counter);
+            printf("New Offset Data:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
 
+        }
 
     }
 

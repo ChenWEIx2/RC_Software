@@ -1,12 +1,12 @@
 #include "flash.h"
 
 
-void FlashRead(uint32_t address, uint16_t* buffer, uint32_t size)
+void FlashRead(uint32_t address, uint8_t* buffer, uint32_t size)
 {
     uint8_t i;
     for(i = 0;i < size;i++)
     {
-        buffer[i] = *(volatile uint16_t*) (address + i);
+        buffer[i] = *(volatile uint8_t*) (address + i);
     }
     printf("Read Successfully!\r\n");
 }
@@ -37,7 +37,7 @@ uint8_t FlashEraseSector5()
     }
 }
 
-uint8_t FlashWriteWithoutErase(uint32_t address, uint16_t* buffer, uint32_t size)
+uint8_t FlashWriteWithoutErase(uint32_t address, uint8_t* buffer, uint32_t size)
 {
     HAL_StatusTypeDef hal_sta = HAL_OK;
 	uint32_t          pos = 0;
@@ -52,7 +52,7 @@ uint8_t FlashWriteWithoutErase(uint32_t address, uint16_t* buffer, uint32_t size
 	else return 0;
 }
 
-uint8_t FlashWrite(uint32_t address, uint16_t* buffer, uint32_t size)
+uint8_t FlashWrite(uint32_t address, uint8_t* buffer, uint32_t size)
 {
     uint8_t write_flag;
     
@@ -66,7 +66,7 @@ uint8_t FlashWrite(uint32_t address, uint16_t* buffer, uint32_t size)
     FlashEraseSector5();
     write_flag = FlashWriteWithoutErase(address,buffer,size);
     HAL_FLASH_Lock();
-    printf("Write Successfully!\r\n");
+    printf("Write Flag:%d!\r\n",write_flag);
 
     return write_flag;
 }
