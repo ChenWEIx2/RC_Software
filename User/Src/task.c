@@ -3,7 +3,12 @@
 
 void Task_25Hz(__Key_Data key_data,__Rocker_Data rocker_data)
 {
-    //printf("Key status:%d, %d, %d, %d, %d, %d.\r\n",key_data.key_0,key_data.key_1,key_data.key_2,key_data.key_3,key_data.key_4,key_data.key_5);
+    printf("Key status:%d, %d, %d, %d, %d, %d.\r\n",key_data.front_fine_tune_Key,
+                                                    key_data.back_fine_tune_key,
+                                                    key_data.left_fine_tune_key,
+                                                    key_data.right_fine_tune_key,
+                                                    key_data.left_key,key_data.right_key);
+                                                    
     printf("Pitch=%d.\r\n",rocker_data.pitch);
     printf("Roll=%d.\r\n",rocker_data.roll);
     printf("Throttle=%d.\r\n",rocker_data.throttle);

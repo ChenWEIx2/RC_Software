@@ -146,6 +146,7 @@ int main(void)
       Task_500Hz(&rocker_data,adc_result,&key_data,key_pin,&start_flag,offset_data);
       task_500hz_flag = 0;
     }
+  
     /*
     if(task_100hz_flag && start_flag.offset_finish_flag && start_flag.unlock_finish_flag)
     {
@@ -160,6 +161,7 @@ int main(void)
       Task_25Hz(key_data,rocker_data);
       task_25hz_flag = 0;
     }
+    
     
     
     
