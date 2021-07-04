@@ -60,9 +60,7 @@
 /* USER CODE BEGIN PV */
 
 uint8_t task_counter = 0;
-uint8_t task_25hz_flag = 0;
 uint8_t task_100hz_flag = 0;
-uint8_t task_500hz_flag = 0;
 
 __Key_Data key_data;
 __Rocker_Data rocker_data;
@@ -139,34 +137,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    
-    if(task_500hz_flag)
-    {
-      //printf("Task 500Hz : Processing rc data.\r\n");
-      Task_500Hz(&rocker_data,adc_result,&key_data,key_pin,&start_flag,offset_data);
-      task_500hz_flag = 0;
-    }
   
-    
-    if(task_100hz_flag && start_flag.offset_finish_flag && start_flag.unlock_finish_flag)
+    if(task_100hz_flag && start_flag.unlock_finish_flag)
     {
-      printf("Task 100HZ : Transmitting rc data by NRF24L01.\r\n");
       Task_100Hz(rocker_data,key_data);
       task_100hz_flag = 0;
     }
-    
-    if(task_25hz_flag)
-    {
-      printf("Task 25HZ : Printf rc data.\r\n");
-      Task_25Hz(key_data,rocker_data);
-      task_25hz_flag = 0;
-    }
-    
-    
-    
-    
-    
-
   }
   /* USER CODE END 3 */
 }
@@ -222,23 +198,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htm)
   //if(!(task_500hz_flag || task_100hz_flag || task_25hz_flag))
     task_counter++;
 
-  if(task_counter%2 == 0) 
-    task_500hz_flag = 1;
-  else
-    task_500hz_flag = 0;
+  if(task_counter%2 == 0)
+  {
+    Task_500Hz(&rocker_data,adc_result,&key_data,key_pin,&start_flag,offset_data);
+  } 
 
-  if(task_counter%10 == 0)
-    task_100hz_flag = 1;
-  else
-    task_100hz_flag = 0;
+  if(task_counter%10 == 0) task_100hz_flag = 1;
+  else task_100hz_flag = 0;
   
   if(task_counter%40 == 0)
   {
-    task_25hz_flag = 1;
     task_counter = 0;
+    Task_25Hz(key_data,rocker_data);
   }
-  else
-    task_25hz_flag = 0;  
+
 
 }
 /* USER CODE END 4 */

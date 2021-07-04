@@ -40,18 +40,18 @@ void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data)
     nrf24l01_tx_buff[12] = (uint8_t) (rocker_data.yaw * 0.01);        //Thousand digit + Hundered digit
     nrf24l01_tx_buff[13] = (uint8_t) (rocker_data.yaw % 100);         //Ten digit + Seat digit
 
-    while(nrf24l01_check_count++ < 11)                 //Check nrf24l01
+    while(nrf24l01_check_count++ < 5)                 //Check nrf24l01
 	{
         if(!NRF24L01_Check())
         {
             nrf24l01_flag = 1;
             NRF24L01_TX_Mode();
-            printf("NRF24L01 enter TX mode.\r\n");
+            LED_Green_ON;
             break;
         }
         else
         {
-            printf("Can not find nrf24l01!!!\r\n");
+            LED_Green_Toggle;
             nrf24l01_flag = 0;
 		    HAL_Delay(1000);
         }
@@ -59,13 +59,11 @@ void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data)
 
     if(nrf24l01_flag && (NRF24L01_TxPacket(nrf24l01_tx_buff)==TX_OK))
     {
-      printf("Tx success.\r\n");
-      LED_Green_ON;
+      LED_Red_ON;
     }
     else
     {
-      printf("TX error!!!\r\n");
-      LED_Green_OFF;
+      LED_Red_OFF;
     } 
  
 }
@@ -93,7 +91,7 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
             offset_data[0] = (int16_t)(offset_temp[0]) * (int16_t)(offset_temp[4]-1);
             offset_data[1] = (int16_t)(offset_temp[1]) * (int16_t)(offset_temp[5]-1);
             offset_data[2] = (int16_t)(offset_temp[2]) * (int16_t)(offset_temp[6]-1);
-            offset_data[3] = (int16_t)(offset_temp[3]) * (int16_t)(offset_temp[7]-1);
+            offset_data[3] = (int16_t)(offset_temp[3]) * (int16_t)(offset_temp[7]-1) * 3;
 
             UNLOCK_BEEP;
             printf("Unlock finish and Get offset data:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
@@ -151,6 +149,7 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
                 offset_temp[i+4] = (offset_data[i] > 0)? 2:0;
             }
             FLASH_WRITE_SECTOR5(offset_temp,8);
+            offset_temp[3] = (uint8_t)(offset_temp[3] / 3);
             printf("New Offset Data:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
 
         }
