@@ -17,11 +17,9 @@
  #include "stm32f4xx.h"
  #include "rc_struct.h"
 
- void KEY_GPIO_Init(void);
-
  uint8_t Key_Scan(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin);
 
- void Key_Data_Write(GPIO_TypeDef* GPIOx,uint16_t* GPIO_Pin,__Key_Data* data);
+ void Key_Data_Write(uint16_t* GPIO_Pin,__Key_Data* data);
 
 
  #endif
