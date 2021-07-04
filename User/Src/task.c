@@ -8,7 +8,6 @@ void Task_25Hz(__Key_Data key_data,__Rocker_Data rocker_data)
                                                     key_data.left_fine_tune_key,
                                                     key_data.right_fine_tune_key,
                                                     key_data.left_key,key_data.right_key);
-                                                    
     printf("Pitch=%d.\r\n",rocker_data.pitch);
     printf("Roll=%d.\r\n",rocker_data.roll);
     printf("Throttle=%d.\r\n",rocker_data.throttle);
@@ -43,7 +42,7 @@ void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data)
 
     while(nrf24l01_check_count++ < 11)                 //Check nrf24l01
 	{
-        if(NRF24L01_Check())
+        if(!NRF24L01_Check())
         {
             nrf24l01_flag = 1;
             NRF24L01_TX_Mode();

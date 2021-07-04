@@ -147,20 +147,21 @@ int main(void)
       task_500hz_flag = 0;
     }
   
-    /*
+    
     if(task_100hz_flag && start_flag.offset_finish_flag && start_flag.unlock_finish_flag)
     {
       printf("Task 100HZ : Transmitting rc data by NRF24L01.\r\n");
       Task_100Hz(rocker_data,key_data);
       task_100hz_flag = 0;
     }
-    */
+    
     if(task_25hz_flag)
     {
       printf("Task 25HZ : Printf rc data.\r\n");
       Task_25Hz(key_data,rocker_data);
       task_25hz_flag = 0;
     }
+    
     
     
     
