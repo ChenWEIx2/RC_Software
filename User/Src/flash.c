@@ -56,6 +56,12 @@ uint8_t FlashWrite(uint32_t address, uint16_t* buffer, uint32_t size)
 {
     uint8_t write_flag;
     
+    printf("Begin to write:\r\n");
+    for(uint8_t i=0 ; i<size ; i++)
+    {
+        printf("%d , ",buffer[i]);
+    }
+
     HAL_FLASH_Unlock();
     FlashEraseSector5();
     write_flag = FlashWriteWithoutErase(address,buffer,size);

@@ -8,6 +8,7 @@
         "segger_rtt_conf.h": "c",
         "main.h": "c",
         "unlock.h": "c",
-        "beep_functions.h": "c"
+        "beep_functions.h": "c",
+        "task.h": "c"
     }
 }

@@ -12,12 +12,12 @@
 
 typedef struct 
 {
-    uint8_t key_0;
-    uint8_t key_1;
-    uint8_t key_2;
-    uint8_t key_3;
-    uint8_t key_4;
-    uint8_t key_5;
+    uint8_t front_fine_tune_Key;
+    uint8_t back_fine_tune_key;
+    uint8_t left_fine_tune_key;
+    uint8_t right_fine_tune_key;
+    uint8_t left_key;
+    uint8_t right_key;
     
 }__Key_Data;
 
@@ -38,11 +38,16 @@ typedef struct
 
   uint8_t unlock_finish_flag;
   uint8_t offset_finish_flag;
+  uint8_t left_offset_finish_flag;
+  uint8_t right_offset_finish_flag;
 
   uint8_t do_offset_counter;
+  uint8_t do_left_offset_counter;
+  uint8_t do_right_offset_counter;
 
   uint16_t unlock_counter;
-  uint16_t offset_counter;
+  uint16_t left_offset_counter;
+  uint16_t right_offset_counter;
 
 }__Start__Flag;
 

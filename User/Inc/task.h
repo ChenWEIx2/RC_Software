@@ -12,7 +12,7 @@
 #include "rocker_functions.h"
 
 
-void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_Data* key_data,uint16_t* key_Pin,__Start__Flag* start_flag,uint16_t* offset_data);
+void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_Data* key_data,uint16_t* key_Pin,__Start__Flag* start_flag,int16_t* offset_data);
 
 void Task_100Hz(__Rocker_Data rocker_data,__Key_Data key_data);
 

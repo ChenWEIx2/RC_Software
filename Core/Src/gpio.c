@@ -52,10 +52,10 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, LED1_Pin|LED2_Pin|NRF24L01_CE_Pin|NRF24L01_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, Left_Key_Pin|Right_Key_Pin|Beep_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Beep_GPIO_Port, Beep_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PAPin PAPin */
-  GPIO_InitStruct.Pin = Back_Fine_Tune_Key_Pin|NRF24L01_IRQ_Pin;
+  /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
+  GPIO_InitStruct.Pin = Back_Fine_Tune_Key_Pin|NRF24L01_IRQ_Pin|Left_Key_Pin|Right_Key_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -73,12 +73,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = Left_Key_Pin|Right_Key_Pin|Beep_Pin;
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = Beep_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(Beep_GPIO_Port, &GPIO_InitStruct);
 
 }
 

@@ -58,8 +58,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile uint16_t adc_result[5];
-uint16_t offset_data[4];
 
 uint8_t task_counter = 0;
 uint8_t task_25hz_flag = 0;
@@ -69,7 +67,10 @@ uint8_t task_500hz_flag = 0;
 __Key_Data key_data;
 __Rocker_Data rocker_data;
 __Start__Flag start_flag;
-uint16_t key_Pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
+
+volatile uint16_t adc_result[5];
+int16_t offset_data[4] = {0,0,0,0};
+uint16_t key_pin[6] = {Front_Fine_Tune_Key_Pin,Back_Fine_Tune_Key_Pin,
                        Left_Fine_Tune_Key_Pin,Right_Fine_Tune_Key_Pin,
                        Left_Key_Pin,Right_Key_Pin};
 
@@ -121,8 +122,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   POWER_ON_BEEP;
   
-  HAL_TIM_Base_Start_IT(&htim2);  //使能定时器中断
-	HAL_TIM_Base_Start(&htim2);     //启动定时器
+  HAL_TIM_Base_Start_IT(&htim2);  
+	HAL_TIM_Base_Start(&htim2);     
 
   HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adc_result,8);
 
@@ -141,24 +142,25 @@ int main(void)
     
     if(task_500hz_flag)
     {
-      printf("Task 500Hz : Processing rc data.\r\n");
-      Task_500Hz(&rocker_data,adc_result,&key_data,key_Pin,&start_flag,offset_data);
+      //printf("Task 500Hz : Processing rc data.\r\n");
+      Task_500Hz(&rocker_data,adc_result,&key_data,key_pin,&start_flag,offset_data);
       task_500hz_flag = 0;
     }
-    
+    /*
     if(task_100hz_flag && start_flag.offset_finish_flag && start_flag.unlock_finish_flag)
     {
       printf("Task 100HZ : Transmitting rc data by NRF24L01.\r\n");
       Task_100Hz(rocker_data,key_data);
       task_100hz_flag = 0;
     }
-    
+    */
     if(task_25hz_flag)
     {
       printf("Task 25HZ : Printf rc data.\r\n");
       Task_25Hz(key_data,rocker_data);
       task_25hz_flag = 0;
     }
+    
     
     
 
