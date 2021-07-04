@@ -134,7 +134,16 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
         }
 
         start_flag->offset_finish_flag = start_flag->right_offset_finish_flag & start_flag->left_offset_finish_flag;
-        //if(start_flag->offset_finish_flag) FLASH_WRITE_SECTOR5(offset_data,4);
+        if(start_flag->offset_finish_flag)
+        {
+            uint16_t offset_temp[8];
+            for(uint8_t i=0 ;i<4; i++)
+            {
+                offset_temp[i] = abs(offset_data[i]);
+                offset_temp[i+4] = (offset_data[i] > 0)? 2:0;
+            }
+            FLASH_WRITE_SECTOR5(offset_temp,8);
+        }
         
         printf("Offset:%d,%d,%d,%d\r\n",offset_data[0],offset_data[1],offset_data[2],offset_data[3]);
         printf("do offset count:%d,%d\r\n",start_flag->do_right_offset_counter,start_flag->do_left_offset_counter);
