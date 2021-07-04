@@ -5,10 +5,10 @@
 
 void Rocker_Data_ADC2Voltage(__Rocker_Data* rocker_data,volatile uint16_t* adc_data)
 {
-    rocker_data->pitch = *(adc_data + 0) * 3.3 / 4095;
+    rocker_data->pitch = *(adc_data + 2) * 3.3 / 4095;
     rocker_data->roll = *(adc_data + 1) * 3.3 / 4095;
-    rocker_data->throttle = *(adc_data + 2) * 3.3 / 4095;
-    rocker_data->yaw = *(adc_data + 3) * 3.3 / 4095; 
+    rocker_data->throttle = *(adc_data + 3) * 3.3 / 4095;
+    rocker_data->yaw = *(adc_data + 4) * 3.3 / 4095; 
 }
 
 

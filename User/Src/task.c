@@ -80,7 +80,7 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
     {
         if(Unlock_Flag(*rocker_data)) start_flag->unlock_counter +=1;
 
-        if(start_flag->unlock_counter >= 50)  //1s
+        if(start_flag->unlock_counter >= 100)  //1s
         {
             start_flag->unlock_finish_flag = 1;
             start_flag->unlock_counter = 0;
@@ -125,14 +125,14 @@ void Task_500Hz(__Rocker_Data* rocker_data,volatile uint16_t* adc_result,__Key_D
         if(rocker_data->throttle < 1100) start_flag->right_offset_counter += 1;
         if(rocker_data->pitch < 1100) start_flag->left_offset_counter += 1;
 
-        if(start_flag->right_offset_counter >= 50 && !(start_flag->right_offset_finish_flag))  //1s
+        if(start_flag->right_offset_counter >= 100 && !(start_flag->right_offset_finish_flag))  //1s
         {
             start_flag->right_offset_finish_flag = Do_Right_Offset(rocker_data,offset_data,&(start_flag->do_right_offset_counter));
             UNLOCK_BEEP;
         }
  
         //1s + right do not finish + left finish
-        if(start_flag->left_offset_counter >= 50 && (start_flag->right_offset_finish_flag) && !(start_flag->left_offset_finish_flag))
+        if(start_flag->left_offset_counter >= 100 && (start_flag->right_offset_finish_flag) && !(start_flag->left_offset_finish_flag))
         {
             start_flag->left_offset_finish_flag = Do_Left_Offset(rocker_data,offset_data,&(start_flag->do_left_offset_counter));
             UNLOCK_BEEP;
