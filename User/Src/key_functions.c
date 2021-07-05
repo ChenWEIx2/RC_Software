@@ -17,17 +17,17 @@
 
 uint8_t Key_Scan(GPIO_TypeDef* GPIOx,uint16_t GPIO_Pin)
 {
-    /*judege the key was entered or not*/
-    if(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_SET)
+    if(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_RESET)
     {
-        /* Entered */
+        HAL_Delay(10);
+        if(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_RESET)
+        {
+            while(HAL_GPIO_ReadPin(GPIOx,GPIO_Pin) == GPIO_PIN_RESET);
+        }
         return 1;
     }
-    else
-    {
-        /* Did not Enter */
-        return 0;
-    }
+        
+    return 0;
  }
 
  void Key_Data_Write(uint16_t* GPIO_Pin,__Key_Data* data){
